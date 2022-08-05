@@ -1,0 +1,82 @@
+main {
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+  width: 100%;
+  flex-wrap: wrap;
+  background-color: var(--var-gray-4);
+  color: var(--var-gray-0);
+  font-family: var(--var-fonte);
+}
+.backpage {
+  width: 100%;
+  height: 10vh;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 3%;
+}
+.backpage div {
+  width: 290px;
+  display: flex;
+  height: 10vh;
+  justify-content: space-between;
+}
+.backpage h1 {
+  color: var(--var-color-primary);
+  font-size: 24px;
+}
+.backpage h1 {
+  cursor: pointer;
+}
+.go-back,
+.go-out {
+  border-style: none;
+  padding: 15px;
+  height: 57px;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 3px;
+  color: var(--var-gray-0);
+  background-color: var(--var-gray-2);
+}
+.go-back:hover,
+.go-out:hover {
+  cursor: pointer;
+}
+
+.register-button {
+  margin-top: 10px;
+  border-style: none;
+  padding: 15px;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 3px;
+  color: var(--var-gray-0);
+  background-color: var(--var-color-primary-negative);
+}
+.register-button:hover {
+  cursor: pointer;
+  background-color: var(--var-color-primary-focus);
+}
+@media (min-width: 400px) {
+  .backpage {
+    margin-bottom: 0;
+    padding-top: 5%;
+  }
+}
+@media (min-width: 550px) {
+  .backpage div {
+    width: 390px;
+  }
+}
+@media (min-width: 900px) {
+  .backpage .backpage-register {
+    width: 390px;
+  }
+  .backpage div {
+    width: 700px;
+  }
+  .backpage h1 {
+    font-size: 28px;
+  }
+}
