@@ -23,8 +23,8 @@ function FormRegister({ history }) {
       .trim()
       .required("Senha obrigatória")
       .matches(
-        /^(?=.*\d)(?=.*[a-z])(?=.*[$*&@#])[0-9a-zA-Z$*&@#]{8,}$/,
-        "A senha deve contar 8 caracteres incluindo uma letra e um caractere especial"
+        /^(?=.*\d)(?=.*[a-z])(?=.*[$*&@#%/!])[0-9a-zA-Z$*&@#]{8,}$/,
+        "A senha deve contar 8 dígitos e um caractere especial! Ex: (!#$%@&*/)"
       ),
     confirm_password: yup
       .string()
