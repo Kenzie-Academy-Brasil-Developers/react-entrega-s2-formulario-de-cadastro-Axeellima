@@ -1,6 +1,9 @@
+import { useContext } from "react";
 import FormRegister from "../../formRegister";
 import { DivLogin } from "../../../helpers/style-login";
-function Register({ history }) {
+import { UserContext } from "../../../contexts";
+function Register() {
+  const { history } = useContext(UserContext);
   return (
     <main>
       <div className="backpage">
@@ -18,7 +21,7 @@ function Register({ history }) {
         </div>
       </div>
       <DivLogin>
-        <FormRegister history={history}></FormRegister>
+        <FormRegister></FormRegister>
       </DivLogin>
     </main>
   );

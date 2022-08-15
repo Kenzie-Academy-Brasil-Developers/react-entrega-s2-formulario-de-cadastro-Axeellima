@@ -4,8 +4,11 @@ import { Api } from "../../utils/Api";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { ToastContainer } from "react-toastify";
+import { useContext } from "react";
+import { UserContext } from "../../contexts";
 
-function FormLogin({ history }) {
+function FormLogin() {
+  const { history } = useContext(UserContext);
   const formSchema = yup.object().shape({
     email: yup
       .string()

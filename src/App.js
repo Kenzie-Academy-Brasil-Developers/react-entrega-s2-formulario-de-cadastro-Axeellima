@@ -1,25 +1,27 @@
 import "./App.css";
-import { Switch, Route, useHistory } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import Register from "./Components/pages/Register";
 import Login from "./Components/pages/Login";
 import Dashboard from "./Components/pages/Dashbord";
+import UserProvider from "./contexts/";
 
 function App() {
-  const history = useHistory();
   return (
-    <div className="App">
-      <Switch>
-        <Route exact path="/">
-          <Login history={history} />
-        </Route>
-        <Route exact path="/register">
-          <Register history={history} />
-        </Route>
-        <Route exact path="/dashboard">
-          <Dashboard history={history}></Dashboard>
-        </Route>
-      </Switch>
-    </div>
+    <UserProvider>
+      <div className="App">
+        <Switch>
+          <Route exact path="/">
+            <Login />
+          </Route>
+          <Route exact path="/register">
+            <Register />
+          </Route>
+          <Route exact path="/dashboard">
+            <Dashboard />
+          </Route>
+        </Switch>
+      </div>
+    </UserProvider>
   );
 }
 

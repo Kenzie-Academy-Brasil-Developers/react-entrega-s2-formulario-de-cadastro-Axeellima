@@ -1,7 +1,10 @@
 import FormLogin from "../../formLogin";
 import { DivLogin } from "../../../helpers/style-login";
+import { useContext } from "react";
+import { UserContext } from "../../../contexts/";
 
-function Login({ history }) {
+function Login() {
+  const { history } = useContext(UserContext);
   return (
     <main>
       <div className="backpage">
@@ -15,7 +18,7 @@ function Login({ history }) {
       </div>
       <DivLogin>
         <h2 className="action-name">Login</h2>
-        <FormLogin history={history}></FormLogin>
+        <FormLogin></FormLogin>
 
         <p>Ainda não possui uma conta?</p>
         <button

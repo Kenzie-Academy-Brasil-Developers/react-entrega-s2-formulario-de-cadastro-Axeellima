@@ -28,6 +28,7 @@ main {
 .backpage h1 {
   cursor: pointer;
 }
+
 .go-back,
 .go-out {
   border-style: none;

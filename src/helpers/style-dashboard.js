@@ -10,7 +10,7 @@ export const DashMain = styled.main`
     min-height: 100vh;
   }
   .user-page div {
-    width: 290px;
+    max-width: 290px;
     margin: 0 auto;
   }
   .user-page .user-information {
@@ -46,20 +46,65 @@ export const DashMain = styled.main`
     font-weight: bold;
     text-decoration: underline;
   }
+  .techs div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .techs div h3 {
+    max-width: 260px;
+  }
+  .techs div .add-button {
+    width: 25px;
+    height: 25px;
+    background-color: var(--var-gray-3);
+    color: var(--var-gray-0);
+  }
+  .techs div .add-button:hover {
+    cursor: pointer;
+  }
+  .user-page .add-tech {
+    width: 250px;
+    position: relative;
+    margin: 0 auto;
+    padding: 20px;
+    box-shadow: 5px 5px 500px 1000px rgba(0, 0, 0, 0.6);
+    z-index: 2;
+  }
+  .user-page .add-tech form button {
+    margin: 0px;
+    border-style: none;
+    padding: 15px;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 3px;
+    color: var(--var-gray-0);
+    background-color: var(--var-color-primary);
+  }
+  .user-page .add-tech form button:hover {
+    cursor: pointer;
+  }
   @media (min-width: 550px) {
     .user-page div {
       width: 390px;
     }
+    .user-page .add-tech {
+      width: 350px;
+    }
   }
   @media (min-width: 900px) {
     .user-page div {
-      width: 700px;
+      width: 100%;
+      max-width: 700px;
     }
     .user-page div h1 {
       font-size: 22px;
     }
     .user-page div .user-module {
       font-size: 16px;
+    }
+    .techs div h3 {
+      max-width: max-content;
     }
   }
 `;

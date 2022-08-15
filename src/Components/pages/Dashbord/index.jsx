@@ -1,6 +1,10 @@
 import { DashMain } from "../../../helpers/style-dashboard";
+import { useContext } from "react";
+import { UserContext } from "../../../contexts";
+import AddModal from "../../AddModal";
 
-function Dashboard({ history }) {
+function Dashboard() {
+  const { history } = useContext(UserContext);
   return (
     <DashMain>
       {localStorage.getItem("kenzieHub:@token") !== null ? (
@@ -35,13 +39,7 @@ function Dashboard({ history }) {
                 {localStorage.getItem("kenzieHub:@module")}
               </p>
             </div>
-            <div>
-              <h3>Que pena! Estamos em desenvolvimento :(</h3>
-              <p>
-                Nossa aplicação está em desenvolvimento, em breve teremos
-                novidades
-              </p>
-            </div>
+            <AddModal></AddModal>
           </section>
         </>
       ) : (

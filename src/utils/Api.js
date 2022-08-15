@@ -42,4 +42,22 @@ export class Api {
       });
     return login;
   }
+  static async searchUser(token) {
+    const user = await axios
+      .get("https://kenziehub.herokuapp.com/profile", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then(function (response) {
+        console.log(response);
+        return response;
+      })
+      .catch(function (error) {
+        console.log(error);
+        console.log(error.response.data.message);
+        localStorage.clear();
+      });
+    return user;
+  }
 }
