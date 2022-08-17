@@ -1,49 +1,72 @@
 import { StyledForm } from "../../helpers/style-form";
-import { useState } from "react";
-import { IoIosAdd } from "react-icons/io";
+import { useForm } from "react-hook-form";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useContext } from "react";
+import { TechContext } from "../../contexts/TechContext";
+import { UserContext } from "../../contexts";
+import { Api } from "../../utils/Api";
 
 function AddModal() {
-  const [openModal, setOpenModal] = useState(false);
-
+  const { openModal, setOpenModal, setTechs, token } = useContext(UserContext);
+  const { newTech } = useContext(TechContext);
+  const formSchema = yup.object().shape({
+    title: yup
+      .string()
+      .min(2, "É necessário 2 caracteres ou mais para a tecnologia")
+      .max(12, "Máximo de 12 caracteres excedido")
+      .required("Tecnologia obrigatória"),
+  });
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(formSchema),
+  });
+  const onSubmit = async (data) => {
+    const response = await newTech(data);
+    console.log(response);
+    if (!response.message) {
+      Api.searchUser(token, setTechs);
+      setTimeout(() => {
+        setOpenModal(!openModal);
+      }, 2500);
+    }
+  };
   return (
     <>
-      {openModal ? (
-        <div className="add-tech">
+      <div className="add-tech">
+        <div className="back-dash">
           <h1>Cadastrar Tecnologia</h1>
-
-          <StyledForm>
-            <label htmlFor="name">Nome</label>
-            <input
-              type="text"
-              id="name"
-              placeholder="Digite a tecnologia/línguagem aqui"
-            />
-
-            <label htmlFor="status">Status</label>
-            <select name="Iniciante" id="status">
-              <option value="Iniciante">Iniciante</option>
-              <option value="Intermedi">Intermediário</option>
-              <option value="Intermedi">Avançado</option>
-            </select>
-
-            <button>Adicionar</button>
-          </StyledForm>
+          <button
+            onClick={() => {
+              setOpenModal(!openModal);
+            }}
+          >
+            X
+          </button>
         </div>
-      ) : (
-        <div className="techs">
-          <div>
-            <h3>Que pena! Você ainda não tem nenhuma tecnologia por aqui :(</h3>
-            <IoIosAdd
-              onClick={() => {
-                setOpenModal(!openModal);
-                console.log("gay");
-              }}
-              className="add-button"
-            />
-          </div>
-          <p>Adicione suas tecnologias e seu nível de conhecimento!</p>
-        </div>
-      )}
+        <StyledForm onSubmit={handleSubmit(onSubmit)}>
+          <label htmlFor="title">Tecnologia</label>
+          <input
+            type="text"
+            id="title"
+            placeholder="Digite a tecnologia/línguagem aqui"
+            {...register("title")}
+          />
+          <p className="error-message">{errors.title?.message}</p>
+
+          <label htmlFor="status">Status</label>
+          <select id="status" {...register("status")}>
+            <option value="Iniciante">Iniciante</option>
+            <option value="Intermediario">Intermediário</option>
+            <option value="Avançado">Avançado</option>
+          </select>
+
+          <button type="Submit">Adicionar</button>
+        </StyledForm>
+      </div>
     </>
   );
 }

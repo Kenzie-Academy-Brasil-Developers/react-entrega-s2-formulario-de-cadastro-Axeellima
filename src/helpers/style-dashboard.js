@@ -10,7 +10,7 @@ export const DashMain = styled.main`
     min-height: 100vh;
   }
   .user-page div {
-    max-width: 290px;
+    width: 280px;
     margin: 0 auto;
   }
   .user-page .user-information {
@@ -46,33 +46,41 @@ export const DashMain = styled.main`
     font-weight: bold;
     text-decoration: underline;
   }
-  .techs div {
+  .add-button {
     display: flex;
     justify-content: space-between;
-    align-items: center;
   }
-  .techs div h3 {
-    max-width: 260px;
-  }
-  .techs div .add-button {
+  .add-button .button {
+    margin-top: 10px;
     width: 25px;
     height: 25px;
     background-color: var(--var-gray-3);
     color: var(--var-gray-0);
   }
-  .techs div .add-button:hover {
-    cursor: pointer;
+  .add-tech .back-dash {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 250px;
+  }
+  .add-tech .back-dash button {
+    border-style: none;
+    background-color: var(--var-gray-4);
+    color: white;
+    font-size: 20px;
   }
   .user-page .add-tech {
+    background-color: var(--var-gray-4);
     width: 250px;
-    position: relative;
-    margin: 0 auto;
+    position: absolute;
+    right: -50%;
+    left: -50%;
     padding: 20px;
-    box-shadow: 5px 5px 500px 1000px rgba(0, 0, 0, 0.6);
     z-index: 2;
+    box-shadow: 5px 5px 500px 1000px rgba(0, 0, 0, 0.6);
   }
   .user-page .add-tech form button {
-    margin: 0px;
+    margin-top: 20px;
     border-style: none;
     padding: 15px;
     font-size: 14px;
@@ -81,8 +89,38 @@ export const DashMain = styled.main`
     color: var(--var-gray-0);
     background-color: var(--var-color-primary);
   }
+  .user-page .add-tech form {
+    width: 250px;
+  }
   .user-page .add-tech form button:hover {
     cursor: pointer;
+  }
+  .techs {
+    background-color: var(--var-gray-3);
+    width: 280px;
+    margin: 0 auto;
+    list-style: none;
+    padding: 5px 8px;
+    border-radius: 3px;
+  }
+  .techs li {
+    display: flex;
+    justify-content: space-between;
+    background-color: var(--var-gray-4);
+    padding: 3px;
+    border-radius: 3px;
+    margin: 10px 0 8px 0;
+  }
+  .techs li h3 {
+    padding-left: 10px;
+  }
+  .techs li div {
+    padding-right: 10px;
+    margin: 0;
+    width: auto;
+    display: flex;
+    align-items: center;
+    gap: 15px;
   }
   @media (min-width: 550px) {
     .user-page div {
@@ -90,6 +128,17 @@ export const DashMain = styled.main`
     }
     .user-page .add-tech {
       width: 350px;
+    }
+    .user-page .add-tech form {
+      width: 350px;
+    }
+  }
+  @media (min-width: 550px) {
+    .add-tech .back-dash {
+      width: 350px;
+    }
+    .techs {
+      width: 400px;
     }
   }
   @media (min-width: 900px) {
@@ -103,8 +152,9 @@ export const DashMain = styled.main`
     .user-page div .user-module {
       font-size: 16px;
     }
-    .techs div h3 {
-      max-width: max-content;
+    .techs {
+      width: 710px;
+      padding: 5px 15px;
     }
   }
 `;

@@ -8,7 +8,7 @@ import { useContext } from "react";
 import { UserContext } from "../../contexts";
 
 function FormLogin() {
-  const { history } = useContext(UserContext);
+  const { history, setTechs } = useContext(UserContext);
   const formSchema = yup.object().shape({
     email: yup
       .string()
@@ -31,7 +31,7 @@ function FormLogin() {
   });
   async function onSubmit(data) {
     const response = await Api.loginUser(data);
-
+    setTechs(response.data.user.techs);
     if (!response.message) {
       setTimeout(() => {
         history.push("/dashboard");

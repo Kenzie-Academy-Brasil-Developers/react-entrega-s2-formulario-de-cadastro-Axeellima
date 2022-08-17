@@ -1,10 +1,17 @@
 import { DashMain } from "../../../helpers/style-dashboard";
 import { useContext } from "react";
 import { UserContext } from "../../../contexts";
+import { IoIosAdd } from "react-icons/io";
+import { CgTrash } from "react-icons/cg";
 import AddModal from "../../AddModal";
+import { ToastContainer } from "react-toastify";
+import { TechContext } from "../../../contexts/TechContext";
+import { Api } from "../../../utils/Api";
 
 function Dashboard() {
-  const { history } = useContext(UserContext);
+  const { openModal, setOpenModal, history, techs, token, setTechs } =
+    useContext(UserContext);
+  const { delTech } = useContext(TechContext);
   return (
     <DashMain>
       {localStorage.getItem("kenzieHub:@token") !== null ? (
@@ -39,7 +46,40 @@ function Dashboard() {
                 {localStorage.getItem("kenzieHub:@module")}
               </p>
             </div>
-            <AddModal></AddModal>
+            <div className="add-button">
+              <h3>Tecnologias</h3>
+              <IoIosAdd
+                onClick={() => {
+                  setOpenModal(!openModal);
+                }}
+                className="button"
+              ></IoIosAdd>
+            </div>
+            {openModal ? <AddModal></AddModal> : <></>}
+            {techs.length > 0 ? (
+              <ul className="techs">
+                {techs.map((item, index) => (
+                  <li key={index}>
+                    <h3>{item.title}</h3>
+                    <div>
+                      <p>{item.status}</p>
+                      <CgTrash
+                        onClick={async () => {
+                          await delTech(item.id);
+                          await Api.searchUser(token, setTechs);
+                        }}
+                        size={20}
+                      ></CgTrash>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <div>
+                <h1>Sem tecnologias aprendidas por aqui</h1>
+                <p>Adicione novas tecnologias</p>
+              </div>
+            )}
           </section>
         </>
       ) : (
@@ -65,6 +105,7 @@ function Dashboard() {
           </p>
         </div>
       )}
+      <ToastContainer></ToastContainer>
     </DashMain>
   );
 }
