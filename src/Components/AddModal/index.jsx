@@ -25,10 +25,11 @@ function AddModal() {
     resolver: yupResolver(formSchema),
   });
   const onSubmit = async (data) => {
+    console.log(data);
     const response = await newTech(data);
     console.log(response);
     if (!response.message) {
-      Api.searchUser(token, setTechs);
+      await Api.searchUser(token, setTechs);
       setTimeout(() => {
         setOpenModal(!openModal);
       }, 2500);

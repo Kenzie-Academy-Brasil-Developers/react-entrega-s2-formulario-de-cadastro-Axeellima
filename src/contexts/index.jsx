@@ -12,12 +12,21 @@ const UserProvider = ({ children }) => {
   const token = localStorage.getItem("kenzieHub:@token");
 
   useEffect(() => {
-    Api.searchUser(token, setTechs);
-    return;
+    async function fetchData() {
+      await Api.searchUser(token, setTechs);
+    }
+    fetchData();
   }, []);
   return (
     <UserContext.Provider
-      value={{ openModal, setOpenModal, history, techs, setTechs, token }}
+      value={{
+        openModal,
+        setOpenModal,
+        history,
+        techs,
+        setTechs,
+        token,
+      }}
     >
       {children}
     </UserContext.Provider>

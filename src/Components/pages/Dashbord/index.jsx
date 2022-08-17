@@ -9,7 +9,7 @@ import { TechContext } from "../../../contexts/TechContext";
 import { Api } from "../../../utils/Api";
 
 function Dashboard() {
-  const { openModal, setOpenModal, history, techs, token, setTechs } =
+  const { openModal, setOpenModal, history, techs, setTechs, token } =
     useContext(UserContext);
   const { delTech } = useContext(TechContext);
   return (

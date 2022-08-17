@@ -30,13 +30,13 @@ function FormLogin() {
     resolver: yupResolver(formSchema),
   });
   async function onSubmit(data) {
-    const response = await Api.loginUser(data);
-    setTechs(response.data.user.techs);
+    const response = await Api.loginUser(data, setTechs);
+    console.log(response);
     if (!response.message) {
-      setTimeout(() => {
+      setTimeout(async () => {
         history.push("/dashboard");
       }, 3000);
-      console.log(response);
+      await Api.searchUser(response.data.token, setTechs);
     }
   }
   return (

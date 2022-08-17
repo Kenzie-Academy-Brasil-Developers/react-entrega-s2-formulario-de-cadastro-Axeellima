@@ -1,10 +1,12 @@
+import { useContext } from "react";
 import { createContext } from "react";
+import { UserContext } from "..";
 import { Api } from "../../utils/Api";
 
 export const TechContext = createContext({});
 
 const TechProvider = ({ children }) => {
-  const token = localStorage.getItem("kenzieHub:@token");
+  const { token } = useContext(UserContext);
 
   const newTech = async (data) => {
     const create = await Api.createTech(token, data);

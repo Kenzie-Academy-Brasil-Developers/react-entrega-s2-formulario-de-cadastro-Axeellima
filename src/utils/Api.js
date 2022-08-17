@@ -2,10 +2,11 @@ import axios from "axios";
 import { Toast } from "./toast";
 
 export class Api {
-  static async registerUser(data) {
+  static async registerUser(data, callback) {
     const register = await axios
       .post("https://kenziehub.herokuapp.com/users", data)
       .then(function (response) {
+        callback(response.data.user.techs);
         Toast.sucess("Cadastro realizado com sucesso");
         return response;
       })
