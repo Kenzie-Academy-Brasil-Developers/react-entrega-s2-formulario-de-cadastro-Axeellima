@@ -65,7 +65,7 @@ function Dashboard() {
                       <p>{item.status}</p>
                       <CgTrash
                         onClick={async () => {
-                          await delTech(item.id);
+                          await delTech({ id: item.id });
                           await Api.searchUser(token, setTechs);
                         }}
                         size={20}

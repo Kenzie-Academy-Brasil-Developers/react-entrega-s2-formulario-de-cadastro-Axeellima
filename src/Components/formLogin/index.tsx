@@ -5,8 +5,35 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { ToastContainer } from "react-toastify";
 import { useContext } from "react";
-import { UserContext } from "../../contexts";
+import { UserContext } from "contexts";
 
+interface ITechs {
+  created_at: String;
+  id: String;
+  status: String;
+  title: String;
+  update_at: String;
+}
+interface IResponseLogin {
+  data: {
+    token: String;
+    user: {
+      id: String;
+      email: String;
+      name: String;
+      contact: String;
+      course_module: String;
+      bio: String;
+      avatar_url?: String;
+      techs: ITechs[];
+    };
+  };
+  message?: String;
+}
+interface IOnSubmit {
+  email: String;
+  password: String;
+}
 function FormLogin() {
   const { history, setTechs } = useContext(UserContext);
   const formSchema = yup.object().shape({
@@ -26,11 +53,13 @@ function FormLogin() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
+  } = useForm<IOnSubmit>({
     resolver: yupResolver(formSchema),
   });
-  async function onSubmit(data) {
-    const response = await Api.loginUser(data, setTechs);
+  async function onSubmit(data: IOnSubmit) {
+    const response: IResponseLogin = (await Api.loginUser(
+      data
+    )) as IResponseLogin;
     console.log(response);
     if (!response.message) {
       setTimeout(async () => {

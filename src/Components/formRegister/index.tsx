@@ -5,9 +5,32 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { ToastContainer } from "react-toastify";
 import { useContext } from "react";
-import { UserContext } from "../../contexts";
+import { UserContext } from "contexts";
 
 function FormRegister() {
+  interface IOnSubmit {
+    name: String;
+    email: String;
+    password: String;
+    confirm_password: String;
+    bio: String;
+    contact: String;
+    course_module: String;
+  }
+  interface IResponseRegister {
+    data: {
+      id: String;
+      name: String;
+      email: String;
+      contact: String;
+      course_module: String;
+      bio: String;
+      avatar_url?: String;
+      created_at: String;
+      updated_at: String;
+    };
+    message?: String;
+  }
   const { history } = useContext(UserContext);
   const formSchema = yup.object().shape({
     name: yup
@@ -43,11 +66,13 @@ function FormRegister() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
+  } = useForm<IOnSubmit>({
     resolver: yupResolver(formSchema),
   });
-  const onSubmit = async (data) => {
-    const register = await Api.registerUser(data);
+  const onSubmit = async (data: IOnSubmit) => {
+    const register: IResponseRegister = (await Api.registerUser(
+      data
+    )) as IResponseRegister;
 
     if (!register.message) {
       setTimeout(() => {
@@ -125,7 +150,7 @@ function FormRegister() {
         <option value="Quarto módulo (Backend Avançado)">Quarto módulo</option>
       </select>
 
-      <button className="register-button" type="Submit">
+      <button className="register-button" type="submit">
         Cadastrar
       </button>
       <ToastContainer autoClose={2000} />

@@ -3,10 +3,14 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useContext } from "react";
-import { TechContext } from "../../contexts/TechContext";
-import { UserContext } from "../../contexts";
 import { Api } from "../../utils/Api";
+import { UserContext } from "../../contexts";
+import { TechContext } from "../../contexts/TechContext";
 
+interface IOnSubmit {
+  title: String;
+  status: String;
+}
 function AddModal() {
   const { openModal, setOpenModal, setTechs, token } = useContext(UserContext);
   const { newTech } = useContext(TechContext);
@@ -21,13 +25,13 @@ function AddModal() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
+  } = useForm<IOnSubmit>({
     resolver: yupResolver(formSchema),
   });
-  const onSubmit = async (data) => {
+  const onSubmit = async (data: IOnSubmit) => {
     console.log(data);
-    const response = await newTech(data);
-    console.log(response);
+    const response = await newTech({ data });
+
     if (!response.message) {
       await Api.searchUser(token, setTechs);
       setTimeout(() => {
@@ -65,7 +69,7 @@ function AddModal() {
             <option value="Avançado">Avançado</option>
           </select>
 
-          <button type="Submit">Adicionar</button>
+          <button type="submit">Adicionar</button>
         </StyledForm>
       </div>
     </>

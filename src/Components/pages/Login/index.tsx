@@ -1,7 +1,7 @@
 import FormLogin from "../../formLogin";
 import { DivLogin } from "../../../helpers/style-login";
 import { useContext } from "react";
-import { UserContext } from "../../../contexts/";
+import { UserContext } from "contexts";
 
 function Login() {
   const { history } = useContext(UserContext);

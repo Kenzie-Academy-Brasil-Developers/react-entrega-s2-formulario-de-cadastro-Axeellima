@@ -3,8 +3,8 @@ import { Switch, Route } from "react-router-dom";
 import Register from "./Components/pages/Register";
 import Login from "./Components/pages/Login";
 import Dashboard from "./Components/pages/Dashbord";
-import UserProvider from "./contexts/";
-import TechProvider from "./contexts/TechContext";
+import UserProvider from "./contexts/index.tsx";
+import TechProvider from "./contexts/TechContext/index.tsx";
 
 function App() {
   return (
